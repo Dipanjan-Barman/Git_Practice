@@ -1,0 +1,429 @@
+All the texts after '#' are comments
+
+## Arc-dark theme is good
+## Numix cicle icons are good
+
+
+## To change a directory
+cd /home/dipanjan/Documents
+cd ..  # to move one step back in directory
+cd -  # toggel between last two directories 
+
+
+## To view a script using cat
+cat <filename>  # diplays all text at once
+cat -n <filename>  # -n shows line numbers
+
+
+## To view a script or file using less
+less <filename>  # it shows one window at a time, to move to next window press ctrl+f and to move to previous window press ctrl+b
+
+
+## To create a file using touch
+touch foo.txt
+
+
+## To copy 
+cp -i <input_file> <target_location>  # -i ask for permission before overwriting
+cp -r <input_folder> <target_location>  # -r is used to copy a folder and its contents inside 
+cp -p <input_file> <target_location>  # -p for preserving mode, ownership, timestamp
+
+
+## To move
+mv -ir  #similar to copy
+
+
+# To delete (rm deletes pemanently, there is no way to recover once deleted)
+rm -ir  # similar to copy
+rm -f  # delete forcefully
+
+
+## To view contents of a folder using ls
+ls -lh  # list the contents in human readable format
+ls -a  # shows all the files including hidden files
+ls -ltr  # order files based on last modified time
+ls -F  # visual classification of files with special characters
+
+
+## To check current directory
+pwd
+
+
+## Mounting an iso image  executable permission
+mkdir /tmp/try
+sudo mount -o loop,ro,exec,dev /path/to/isofile.iso /tmp/try
+# or
+sudo mount -o loop,exec <filename.iso> <mount_point>
+
+
+## Checking hard drives
+lsblk   # list block devices
+sudo fdisk -l   # list hard drives
+df -hT  # disk usage 
+
+
+## Mounting external hard drives or flash drives
+sudo mkdir /media/tmp
+sudo mount -t ntfs /dev/sdb1 /media/tmp  # To mount ntfs type hard drive sdb1 in tmp
+Sudo mount -t vfat /dev/sdb1 /media/tmp  # To mount FAT32 type hard drive sdb1 in tmp
+
+
+## Unmount external hard drives or flash drives
+sudo umount /media/tmp
+
+
+## To format usb flash drives
+sudo umount /media/tmp  # first unmount the flash drives
+sudo mkfs.vfat /dev/sdb1  # .vfat for FAT32, .ntfs for NTFS, .ext4 for EXT
+sudo eject /dev/sdb
+
+
+## To alias and unlias a command
+alias rm="rm -i"  # to alias
+unalias rm  # to unalias
+# in order to make alias permanent write the above alias command in .bashrc file
+
+
+## To compress and decompress a file using gzip(GNUzip)
+gzip foo.txt  # it overwrites the original file with the compressed one
+gzip -k foo.txt  # to keep both the original file and zip file
+cat foo1.txt foo2.txt foo3.txt | gzip > all.gz  # to compress a group of files into a single compressed file
+gzip -l all.gz  # to know the compression ratio of already existing zip file
+gunzip foo.txt.gz  # to unzip
+# or
+gzip -d foo.txt.gz  # to unzip
+
+
+## To compress and decompress a folder using tar and gzip
+cd ~/test  # to compress the folder test which is in home first change the directory to test folder
+tar cf - test/ | gzip > test.tar.gz
+# or easiest way is 
+tar cvfz test.tar.gz test/  # -c for create, -v for verbose so that the output is shown when the command is running, -f for mentioning the output file or target file where your compressed data is stored, -z for specifying compress with GNUzip
+tar xvfz test.tar.gz  # to unzip in pwd(present working directory)
+# or
+tar xvfz test.tgz
+
+
+## To create an iso image
+# to create iso from optical media
+sudo umount /dev/cdrom  # when creating iso file the device must be unmounted
+dd if=/dev/cdrom of=~/cdrom_image.iso
+# or 
+sudo cat /dev/srx > /home/<user_name>/<file_name.iso>  # eg: sudo cat /dev/sr0 > /home/dipanjan/example.iso
+# to create iso from a directory in hard drive
+mkisofs -o /tmp/cd.iso /tmp/directory/
+
+
+## To check hardware info
+sudo lshw -short
+sudo lspci
+sudo fdisk -l
+
+
+## To save output of a command in a file
+command > output_file   # eg: sudo lshw -short > hardware_info.txt
+
+
+## To find a file in pwd
+sudo find -iname "File_Name"  # find using filename 
+sudo find -empty  # find all empty files in pwd
+
+
+## To covert DOS file type in UNIX file type
+sed 's/.$//' filename
+
+
+## To open a file using VI
+sudo vi foo.txt
+vi -R foo.txt  # open in read only mode
+
+
+## To search for a given string in a file
+grep -i "the" demo_file
+
+
+## To add a path in $PATH variable
+export PATH=$PATH:/path/to/directory  # it works temporarily
+# to add permanently
+export PATH=$PATH:/path/to/dir  # write this in ~/.profile
+# or (eg: to add matlab )
+alias matlab=/usr/locat/Matlab/bin/matlab  # write this at the end of ~/.bashrc
+# another way is to add the following commands in ~/.bashrc file
+PATH=/path/to/dir:$PATH
+export PATH
+# After saving and exiting .bashrc file write the following command in terminal
+source .bashrc
+
+
+## To shutdown
+sudo shutdown -h now  # shutdown the system and power off immediately
+sudo shutdoen -h +10  # shutdown after 10 minutes
+sudo shutdown -r now  # reboot now
+sudo shutdown -Fr     # force the filesystem check during reboot
+
+
+## To check processes running in the system
+ps -ef | more  # shows current running processes
+ps -efH | more  # shows current running processes in tree structure
+
+
+## To display free, used, swap memory available in the system
+free -h
+
+
+## To display top processes in the system
+top  # by default sorted by cpu usage
+top -u oracle  # to view a particular process use -u
+# htop is similar but colored and is not installed by default
+sudo apt-get install htop  # first install htop
+htop  # displays top processes in colored lines
+
+
+## To change permission of a file or folder
+chmod ug+rwx file.txt  # gives full access to user and group (i.e read, write, execute) on a specific file
+chmod g-rwx file.txt  # revokes all access for the group
+chmod -R ug+rwx file.txt  # gives access to all the files in the sub-directories  
+
+
+## To change computer login password from terminal
+passwd  # first it will ask for current password then new password
+passwd USERNAME  # to reset password of other users, only superuser can do it, it will not ask for current password
+passwd -d USERNAME  # to disable password of a user, after this the user can login without any password
+
+
+## To view or configure a network interface (ip adress)
+ifconfig -a  # view all the interfaces along with status
+# start or stop a specific interface using up and down command as shown below
+ifconfig eth0 up
+ifconfig eth0 down
+
+
+# To view hostname and ip address
+hostname  # display name
+hostname -I  # display ip-address
+
+
+## Important infomation about system
+uname -a
+
+
+## To find location of a UNIX command
+whereis <command_name>  # eg: whereis ls
+
+
+## To find location a file or group of files
+locate <fielname>  # eg: locate .bashrc
+
+
+## To display manual page of a command
+man <command_name>  # eg: man ls
+
+
+## To login as super user
+sudo su  # it will give access as root user
+
+
+## To switch to a different user
+su - USERNAME
+
+
+## To connect to a remote mysql database
+mysql -u root -p -h 192.168.1.2  # this will ask for a password 
+mysql -u root -p  # to connect to a local mysql database
+
+
+## Date
+date  # display date and time
+date -s "01/31/2010 23:59:53"  # to set system date from terminal
+# once system date is changed it needs to be synchronized with the hardware clock
+hwclock -systohc
+hwclock --systohc -utc
+
+
+## To see how long a command takes to execute
+time <command>  # time g++ hello.cpp
+
+
+## To download from internet using terminal
+wget http://prdownloads.sourceforge.net/sourceforge/nagios/nagios-3.2.1.tar.gz
+# download and store it with a different name
+wget -O taglist.zip http://www.vim.org/scripts/download_script.php?src_id=7701
+
+
+# To install conky
+sudo apt-add-repository -y ppa:teejee2008/ppa  # first add this repository
+sudo apt-get update  # update 
+sudo apt-get install conky-manager  # install conky manager, it is a GUI version
+sudo apt-get install conky-all  # install remaining conky packages
+# run conky manager from application window
+# download more themes from devianart website and extract the downloaded zip files in ~/.conky folder
+# then use them from conky manager
+# conky needs lua, if it is not installed then install lua (to check whether lua is there or not type "which lua", if it is installed it will show location of lua file otherwise it will show nothing), check online how to install lua
+# if battery does not work then check whether acpi is installed or not, if not install acpi
+sudo apt install acpi 
+
+## To check which linux and which version i am using
+lsb_release -a  # it doesn't work in ubuntu sometimes
+cat /proc/version  # it works almost in everything
+
+
+## To view all the installed softwares
+dpkg --get-selections  # for Ubuntu and Debian
+rpm -qa | less  # for Red Hat, Fedora, CentOS
+
+
+## To check which shell i am using
+echo $0  
+
+
+## To update Ubunte version
+# execute the following commands sequentially
+1. sudo apt-get update  
+2. sudo apt-get upgrade
+3. sudo apt-get dist-upgrade
+4. sudo update-manager -d  # it will open update manager and then if version upgrade is available then upgrade option will come, click on it and do the necessary steps asked by update manager further (Recommended)
+# or
+4. sudo do-release-upgrade  # it will upgrade from terminal
+
+
+## To securely copy files and directories between remote hosts without starting an FTP session or logging into the remote systems explicitly.
+scp [options] username1@source_host:directory1/filename1 username2@destination_host:directory2/filename2  # make sure to include a space between the source and destination paths
+
+
+## To logging into a remote machine and for executing commands on a remote machine
+ssh username@remote-server  # to login
+# or
+ssh -l username remote-server  # to login
+logout  # to logout
+#or
+exit  # to logout
+
+
+## To see currentl running process
+1) ps
+2) ps -ag  # to get info about all running process
+3) ps aux  # to display the owner of the processes along with the processes
+4) ps aux | grep  <process-U-want-to see>  # to see if a particular process is running or not
+5) pstree # to display a tree of processes
+
+
+## To know PID (process ID) of an application
+pidof <application_name>
+
+
+##  To kill a process
+1. press ctrl+c 
+# or
+2. kill <PID of target process>  # it sents the kill signal to the software
+# or
+3. kill -KILL <PID of target process>  # it sent the kill signal not to software but to operating system kernel
+4. killall <process name>  # to kill a process using name
+5. kill 0  # to stop all process except shell
+
+
+## To open an application from terminal and close the terminal after that without closing the application
+<command_name> & exit  # it will open the application and close the terminal
+<command_name> & diown  # it will open the application but keep the terminal for some other use
+<command_name> &  # it works in same way as disown, the application will run in background
+
+
+## To fix low the sound problem
+1. sudo chmod 777 /etc/modprobe.d/alsa-base.conf
+# open the file in vim
+2. vi /etc/modprobe.d/alsa-base.conf
+# add the following line at the end of the file
+snd-hda-intel model=generic
+# restart
+
+
+## Better way to solve low volume problem
+1. Install PulseAudio Manager
+2. Run "paman" from terminal
+3. Go to "Devices" tab
+4. Double-click on your devices sink and manage your volume
+# or open PulseAudio volume control from dash and change volumes from there
+5. pavucontrol  # to open PulseAudio volume control from terminal
+
+
+## To solve no sound problem
+sudo alsa force-reload
+# if the above one doesn't work then do the following one
+1. sudo apt-get remove --purge alsa-base pulseaudio
+2. sudo apt-get install alsa-base pulseaudio
+3. sudo alsa force-reload
+
+
+## To change start up applications
+cd ~/.config/autostart
+ls  # it will show each files of correspoinding app
+vi <file_name>  # open the file using any editor
+# change the following "true" to "false"
+X-GNOME-Autostart-enabled=false
+
+
+## To clear terminal commands history
+history -c 
+
+
+## To open MATLAB in terminal mode
+matlab -nodesktop 
+
+
+## To check all executed commands (including background) since last log in session
+# open the log in file in "/var/log/syslog"
+vi /var/log/syslog
+
+
+## To access shared files in a windows computer
+# first install samba
+sudo apt install samba
+# then change the type of nautilus in ubuntu
+cd /usr/bin
+sudo chmod 777 nautilus
+# then go to the windows system and make the following changes
+	# 1) go to start and type 'regedit' 
+	# 2) navigate to ' HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\lanmanserver\parameters' and change 'Size' from 1 to 3
+	# 3) navigate to ' HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management' and change 'LargeSystemCache' from 0 to 1
+	# 4) (Start -> cmd.exe) as administrator
+		>net stop LanmanServer /y
+		> net start LanmanServer
+		> net start Browser
+		> net start HomeGroupListener
+# share the files from windows, turn on sharing
+# finally write the following to acces the shared folder
+nautilus smb://<ip-address of the remote system>/
+
+
+## To change default application
+sudo gedit /usr/share/applications/defaults.list  # replace ;
+
+
+## To check file or folder size
+du -h <path/to/dir>
+du -sh *  # to show all non hidden file sizes
+
+
+## simulate typing as we see in movies
+echo "You are going to absolutely love this!" | pv -qL 10
+
+
+## To check programs running during boot time
+systemd-analyze blame  # it will show in terminal
+systemd-analyze plot > bootimage  # it will save the result in image
+
+
+## To install any .deb package
+sudo dpkg -i *.deb
+sudo dpkg --install *.deb
+
+# To remove
+sudo dpkg -r <name of the software installed by dpkg>
+
+
+## Handling jobs
+ctrl+z  # will suspend the current foreground job and sent it to background
+jobs  # will give list of jobs running in background
+fg "%jobname"  # will make it current foreground job
+fg %number_of_job  # will make the job with the corresponding serial number as
+current foreground job
+kill %number_of_job  # will kill the job the corresponding serial number
