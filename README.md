@@ -1,14 +1,35 @@
 # Git Tutorial
-<Author: Dipanjan Barman>
+<Dipanjan-Barman>
 
-* **git clone** *https*  - to copy a repository from git to local machine
+### To copy a repository from git to local machine
 
-* **git status**  - to check any changes made in the repository
+```
+git clone <https>
+```
 
-* **git add** *file_name*  - to update what will be commited
-* **git checkout** --*file_name*  -to discard changes in working directory
+### To check any changes made in the repository
 
-* **git commit -m "message"**  - to commit with a message
+```
+git status
+```
 
-* **git push**  - to push up/sync in github.com
-* **git pull**  - to pull down from github.com
+### To update what will be commited
+
+```
+git add <filename>
+```
+
+* *git checkout --file_name*    -to discard changes in working directory
+
+### To commit with message
+```
+git commit -m "message"
+```
+
+### To push up/sync and pull down in github.com
+```
+git push
+```
+```
+git pull
+```
