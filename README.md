@@ -18,6 +18,10 @@ git status
 ```
 git add <filename>
 ```
+```
+git add .
+# to add all the files together
+```
 
 * *git checkout --filename*    -to **discard** changes in working directory
 
