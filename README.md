@@ -19,7 +19,7 @@ git status
 git add <filename>
 ```
 
-* *git checkout --file_name*    -to discard changes in working directory
+* *git checkout --filename*    -to **discard** changes in working directory
 
 ### To commit with message
 ```
